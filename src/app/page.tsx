@@ -1,5 +1,3 @@
-'use client';
-
 import HeroSection from '@/components/sections/HeroSection';
 import ServicesSection from '@/components/sections/ServicesSection';
 import ValuePropositionSection from '@/components/sections/ValuePropositionSection';
@@ -11,7 +9,7 @@ import CTASection from '@/components/sections/CTASection';
 
 export default function Home() {
   return (
-    <>
+    <main className="flex flex-col min-h-screen">
       <HeroSection />
       <ServicesSection />
       <ValuePropositionSection />
@@ -20,6 +18,6 @@ export default function Home() {
       <ProcessSection />
       <BlogSection />
       <CTASection />
-    </>
+    </main>
   );
 }
