@@ -1,47 +1,48 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import PricingSection, {
   PricingPlan,
 } from "@/components/sections/PricingSection";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { motion, Variants } from "framer-motion";
 import {
   ArrowRight,
-  CheckCircle,
-  TrendingUp,
-  Target,
-  BarChart3,
-  Users,
-  Zap,
-  Lightbulb,
-  Search,
-  Share2,
-  Code,
-  Palette,
-  Video,
-  ShoppingBag,
-  Printer,
-  PanelTop,
-  Truck,
-  Sparkles,
-  Package,
-  Settings,
-  MessageSquare,
-  Megaphone,
-  Eye,
-  MousePointer,
-  PenTool,
-  Smartphone,
-  Globe,
   Award,
-  Clock,
-  Heart,
-  Star,
+  BarChart3,
   Briefcase,
+  CheckCircle,
+  Clock,
+  Code,
+  Eye,
+  Globe,
+  Heart,
+  Lightbulb,
+  Megaphone,
+  MessageSquare,
+  MousePointer,
+  Package,
+  Palette,
+  PanelTop,
+  PenTool,
+  Printer,
+  Search,
+  Settings,
+  Share2,
+  ShoppingBag,
+  Smartphone,
+  Sparkles,
+  Star,
+  Target,
+  TrendingUp,
+  Truck,
+  Users,
+  Video,
+  Zap,
   type LucideIcon,
 } from "lucide-react";
+import Link from "next/link";
+import { ReactNode } from "react";
 
 // Icon mapping for serialization
 const iconMap: Record<string, LucideIcon> = {
@@ -78,6 +79,7 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 interface ServicePageProps {
+  children?: ReactNode;
   heroData: {
     badge: string;
     title: string;
@@ -141,6 +143,7 @@ const itemVariants: Variants = {
 };
 
 export default function ServicePageTemplate({
+  children,
   heroData,
   benefits,
   features,
@@ -153,10 +156,33 @@ export default function ServicePageTemplate({
 }: ServicePageProps) {
   const IconComponent = iconMap[heroData.iconName] || TrendingUp;
 
+  const fallbackVisualCards = [
+    ...features.map((feature) => ({
+      title: feature.title,
+      description: feature.description,
+    })),
+    ...benefits.map((benefit) => ({
+      title: benefit.title,
+      description: benefit.description,
+    })),
+  ].slice(0, 4);
+
+  const defaultFallbackVisualCards = [
+    { title: "Estrategia", description: "Planeación orientada a resultados" },
+    { title: "Ejecución", description: "Implementación con enfoque comercial" },
+    { title: "Optimización", description: "Mejora continua basada en datos" },
+    { title: "Soporte", description: "Acompañamiento experto en cada fase" },
+  ];
+
+  const heroVisualCards =
+    fallbackVisualCards.length > 0
+      ? fallbackVisualCards
+      : defaultFallbackVisualCards;
+
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-16 sm:py-20 md:py-28 overflow-hidden bg-white">
+      <section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 md:pt-36 md:pb-24 overflow-hidden bg-linear-to-r from-white via-slate-50 to-cyan-50/40 min-h-[78vh] lg:min-h-[86vh] flex items-center">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
             className="absolute -top-40 -right-40 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full blur-3xl"
@@ -174,65 +200,87 @@ export default function ServicePageTemplate({
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            className="max-w-4xl mx-auto text-center"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-            <motion.div
-              variants={itemVariants}
-              className="flex justify-center mb-4 sm:mb-6"
-            >
-              <motion.div
-                className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center"
-                style={{ backgroundColor: `${heroData.color}15` }}
-                animate={{ rotate: [0, 5, -5, 0] }}
-                transition={{ duration: 4, repeat: Infinity }}
-              >
-                <IconComponent
-                  className="w-8 h-8 sm:w-10 sm:h-10"
-                  style={{ color: heroData.color }}
-                />
+            <div>
+              <motion.div variants={itemVariants} className="mb-4 sm:mb-5">
+                <motion.div
+                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center mb-4"
+                  style={{ backgroundColor: `${heroData.color}15` }}
+                  animate={{ rotate: [0, 5, -5, 0] }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                >
+                  <IconComponent
+                    className="w-8 h-8 sm:w-10 sm:h-10"
+                    style={{ color: heroData.color }}
+                  />
+                </motion.div>
+
+                <span
+                  className="inline-block text-xs sm:text-sm font-semibold tracking-wider uppercase"
+                  style={{
+                    color: heroData.color,
+                    fontFamily: "var(--font-inter)",
+                  }}
+                >
+                  {heroData.badge}
+                </span>
               </motion.div>
-            </motion.div>
 
-            <motion.span
-              variants={itemVariants}
-              className="inline-block text-xs sm:text-sm font-semibold tracking-wider uppercase mb-3 sm:mb-4"
-              style={{ color: heroData.color, fontFamily: "var(--font-inter)" }}
-            >
-              {heroData.badge}
-            </motion.span>
+              <motion.h1
+                variants={itemVariants}
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-5 sm:mb-6 leading-tight"
+                style={{ fontFamily: "var(--font-montserrat)" }}
+              >
+                {heroData.title}{" "}
+                <span className="text-gradient">
+                  {heroData.highlightedWord}
+                </span>
+              </motion.h1>
 
-            <motion.h1
-              variants={itemVariants}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 sm:mb-6 leading-tight"
-              style={{ fontFamily: "var(--font-montserrat)" }}
-            >
-              {heroData.title}{" "}
-              <span className="text-gradient">{heroData.highlightedWord}</span>
-            </motion.h1>
+              <motion.p
+                variants={itemVariants}
+                className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mb-7 sm:mb-8"
+                style={{ fontFamily: "var(--font-inter)" }}
+              >
+                {heroData.description}
+              </motion.p>
 
-            <motion.p
-              variants={itemVariants}
-              className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-6 sm:mb-8 px-4"
-              style={{ fontFamily: "var(--font-inter)" }}
-            >
-              {heroData.description}
-            </motion.p>
-
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4"
-            >
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full sm:w-auto"
+                variants={itemVariants}
+                className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 w-full max-w-2xl mb-7 sm:mb-8"
+              >
+                {stats.slice(0, 4).map((stat, index) => (
+                  <div key={index} className="text-left">
+                    <div
+                      className="text-3xl sm:text-4xl font-bold leading-none mb-1"
+                      style={{
+                        color: heroData.color,
+                        fontFamily: "var(--font-montserrat)",
+                      }}
+                    >
+                      {stat.value}
+                    </div>
+                    <div
+                      className="text-sm text-gray-600"
+                      style={{ fontFamily: "var(--font-inter)" }}
+                    >
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+
+              <motion.div
+                variants={itemVariants}
+                className="flex flex-col sm:flex-row gap-3 sm:gap-4"
               >
                 <Button
                   size="lg"
-                  className="text-white font-semibold px-6 sm:px-8 py-4 sm:py-5 rounded-full shadow-lg w-full sm:w-auto min-h-[52px] text-sm sm:text-base"
+                  className="text-white font-semibold px-6 sm:px-8 py-4 sm:py-5 rounded-full shadow-lg w-full sm:w-auto min-h-13 text-sm sm:text-base"
                   style={{ backgroundColor: heroData.color }}
                   asChild
                 >
@@ -241,51 +289,57 @@ export default function ServicePageTemplate({
                     <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
                   </Link>
                 </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-2 border-black text-black hover:bg-black hover:text-white font-semibold px-6 sm:px-8 py-4 sm:py-5 rounded-full w-full sm:w-auto min-h-13 text-sm sm:text-base"
+                  asChild
+                >
+                  <Link href="#proceso">Ver Proceso</Link>
+                </Button>
               </motion.div>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-black text-black font-semibold px-6 sm:px-8 py-4 sm:py-5 rounded-full w-full sm:w-auto min-h-[52px] text-sm sm:text-base"
-                asChild
-              >
-                <Link href="#proceso">Ver Proceso</Link>
-              </Button>
+            </div>
+
+            <motion.div variants={itemVariants} className="w-full">
+              {children || (
+                <div className="relative mx-auto w-full max-w-xl rounded-3xl border border-black/10 bg-slate-100 p-5 sm:p-6">
+                  <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                    {heroVisualCards.map((card, index) => (
+                      <div
+                        key={card.title}
+                        className="rounded-2xl border border-black/10 bg-white p-4 sm:p-5 min-h-36 sm:min-h-40 flex flex-col items-center justify-center text-center"
+                      >
+                        <div
+                          className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg"
+                          style={{ backgroundColor: `${heroData.color}24` }}
+                        >
+                          <IconComponent
+                            className="h-5 w-5"
+                            style={{
+                              color: heroData.color,
+                              opacity: 0.95 - index * 0.12,
+                            }}
+                          />
+                        </div>
+                        <p
+                          className="text-black font-semibold text-base mb-1"
+                          style={{ fontFamily: "var(--font-montserrat)" }}
+                        >
+                          {card.title}
+                        </p>
+                        <p
+                          className="text-gray-600 text-sm leading-relaxed"
+                          style={{ fontFamily: "var(--font-inter)" }}
+                        >
+                          {card.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </motion.div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-8 sm:py-12 bg-black">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                className="text-center p-3 sm:p-4"
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div
-                  className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1 sm:mb-2"
-                  style={{
-                    color: heroData.color,
-                    fontFamily: "var(--font-montserrat)",
-                  }}
-                >
-                  {stat.value}
-                </div>
-                <div
-                  className="text-xs sm:text-sm text-gray-400 leading-tight"
-                  style={{ fontFamily: "var(--font-inter)" }}
-                >
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 

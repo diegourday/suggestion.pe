@@ -1,5 +1,6 @@
-import { Metadata } from "next";
 import ServicePageTemplate from "@/components/ServicePageTemplate";
+import SocialMediaHeroVisual from "@/components/SocialMediaHeroVisual";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Redes Sociales que Conectan | Suggestion",
@@ -268,6 +269,8 @@ export default function RedesSocialesPage() {
       faqs={faqs}
       pricingParams={pricingParams}
       relatedServices={relatedServices}
-    />
+    >
+      <SocialMediaHeroVisual />
+    </ServicePageTemplate>
   );
 }
