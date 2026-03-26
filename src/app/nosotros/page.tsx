@@ -211,7 +211,7 @@ export default function NosotrosPage() {
           />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-8 relative z-10">
           <motion.div
             className="max-w-4xl mx-auto text-center"
             variants={containerVariants}
@@ -267,7 +267,7 @@ export default function NosotrosPage() {
 
       {/* Stats Section */}
       <section className="py-8 sm:py-12 bg-white border-b border-gray-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             {stats.map((stat, index) => (
               <motion.div
@@ -299,7 +299,7 @@ export default function NosotrosPage() {
 
       {/* Horizontal Info Cards Section */}
       <section className="py-12 sm:py-16 md:py-20 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-8">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-10 sm:mb-12"
             initial={{ opacity: 0, y: 30 }}
@@ -373,7 +373,7 @@ export default function NosotrosPage() {
         ref={valuesRef}
         className="py-12 sm:py-16 md:py-20 lg:py-28 bg-white"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-8">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -445,7 +445,7 @@ export default function NosotrosPage() {
         ref={teamRef}
         className="py-12 sm:py-16 md:py-20 lg:py-28 bg-black"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-8">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -536,7 +536,7 @@ export default function NosotrosPage() {
         ref={timelineRef}
         className="py-12 sm:py-16 md:py-20 lg:py-28 bg-white"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-8">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -613,7 +613,7 @@ export default function NosotrosPage() {
           />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-8 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -86,7 +86,7 @@ export default function Header() {
             : 'bg-white/80 backdrop-blur-sm shadow-sm'
         }`}
       >
-        <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <nav className="container mx-auto px-6 sm:px-8 lg:px-8">
           <div className="flex items-center justify-between h-14 sm:h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center flex-shrink-0">

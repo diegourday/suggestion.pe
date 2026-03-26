@@ -204,6 +204,59 @@ export default function MarketingDigitalPage() {
     },
   ];
 
+  const pricingParams = [
+    {
+      name: "Starter",
+      description: "Plan ideal para iniciar tu presencia digital",
+      price: "S/1,500",
+      frequency: "/mes",
+      features: [
+        "Estrategia básica",
+        "2 redes sociales",
+        "8 publicaciones/mes",
+        "Reporte mensual",
+        "Soporte por email",
+      ],
+      buttonText: "Comenzar",
+      isPopular: false,
+      buttonVariant: "outline" as const,
+    },
+    {
+      name: "Pro",
+      description: "Para negocios en crecimiento",
+      price: "S/2,500",
+      frequency: "/mes",
+      features: [
+        "Estrategia avanzada",
+        "4 redes sociales",
+        "15 publicaciones/mes",
+        "1 campaña publicitaria",
+        "Reporte quincenal",
+        "Soporte prioritario",
+      ],
+      buttonText: "Elegir Pro",
+      isPopular: true,
+      buttonVariant: "default" as const,
+    },
+    {
+      name: "Enterprise",
+      description: "Estrategias omnicanal y escalables",
+      price: "S/4,500",
+      frequency: "/mes",
+      features: [
+        "Estrategia integral",
+        "Redes ilimitadas",
+        "Múltiples campañas",
+        "SEO avanzado",
+        "Reporte en tiempo real",
+        "Reunión semanal",
+      ],
+      buttonText: "Contactar Ventas",
+      isPopular: false,
+      buttonVariant: "outline" as const,
+    },
+  ];
+
   return (
     <ServicePageTemplate
       heroData={heroData}
@@ -213,6 +266,7 @@ export default function MarketingDigitalPage() {
       stats={stats}
       testimonials={testimonials}
       faqs={faqs}
+      pricingParams={pricingParams}
       relatedServices={relatedServices}
     />
   );

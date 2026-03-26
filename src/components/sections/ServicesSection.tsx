@@ -156,7 +156,7 @@ export default function ServicesSection() {
         />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
+      <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10" ref={ref}>
         {/* Section Header */}
         <motion.div 
           className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16"

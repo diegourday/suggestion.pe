@@ -114,7 +114,7 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-16 sm:pt-20">
+      <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10 pt-16 sm:pt-20">
         <motion.div 
           className="max-w-4xl mx-auto text-center"
           variants={containerVariants}

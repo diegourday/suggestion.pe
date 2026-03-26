@@ -213,7 +213,7 @@ export default function BlogPage() {
           />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-8 relative z-10">
           <motion.div
             className="max-w-4xl mx-auto text-center"
             initial={{ opacity: 0, y: 30 }}
@@ -265,7 +265,7 @@ export default function BlogPage() {
       {/* Featured Posts - Horizontal Layout */}
       {featuredPosts.length > 0 && !searchQuery && !selectedTag && activeCategory === 'all' && (
         <section className="py-8 sm:py-12 bg-white border-b border-gray-100">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-6 sm:px-8 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -373,7 +373,7 @@ export default function BlogPage() {
 
       {/* Main Content */}
       <section ref={contentRef} className="py-12 sm:py-16 md:py-20 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
             {/* Sidebar */}
             <aside className="lg:w-64 xl:w-72 flex-shrink-0">
@@ -762,7 +762,7 @@ export default function BlogPage() {
           />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-8 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

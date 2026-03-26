@@ -101,7 +101,7 @@ export default function PricingSection({
   return (
     <section
       id="pricing"
-      className="py-12 sm:py-16 md:py-24 bg-white relative overflow-hidden"
+      className="py-12 sm:py-16 md:py-24 bg-gray-50 relative overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -116,7 +116,7 @@ export default function PricingSection({
       </div>
 
       <div
-        className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+        className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10"
         ref={ref}
       >
         {/* Section Header */}
@@ -127,10 +127,10 @@ export default function PricingSection({
           transition={{ duration: 0.6 }}
         >
           <motion.h2
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-4 sm:mb-6"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 sm:mb-6"
             style={{ fontFamily: "var(--font-montserrat)" }}
           >
-            Planes y <span className="text-[#FF6600]">precios</span>
+            Planes y <span className="text-gradient">precios</span>
           </motion.h2>
           <motion.p
             className="text-base sm:text-lg text-gray-600"
@@ -152,7 +152,7 @@ export default function PricingSection({
             <motion.div
               key={index}
               variants={itemVariants}
-              className={`relative flex flex-col p-6 sm:p-8 bg-white rounded-3xl ${
+              className={`relative flex flex-col p-6 sm:p-8 bg-white rounded-3xl mx-auto w-full max-w-[300px] md:max-w-none ${
                 plan.isPopular
                   ? "md:-mt-8 shadow-[0_20px_40px_-15px_rgba(255,102,0,0.15)] ring-2 ring-[#FF6600]"
                   : "border border-gray-100 shadow-xl shadow-black/5"

@@ -11,16 +11,16 @@ import {
 import { useRef, useState } from "react";
 import Image from "next/image";
 
-// Usamos URLs de Wikipedia estables y SVG siempre que sea posible
 const brands = [
-  { name: "Tesla", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png" },
-  { name: "Apple", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" },
-  { name: "Nike", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" },
-  { name: "Spotify", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" },
-  { name: "Google", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
-  { name: "Amazon", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
-  { name: "Netflix", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" },
-  { name: "Microsoft", logoUrl: "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" },
+  { name: "Ceinys", logoUrl: "/clientes-logos/ceinys.PNG" },
+  { name: "Corp Logistics", logoUrl: "/clientes-logos/corplogistics.png" },
+  { name: "Mazda", logoUrl: "/clientes-logos/mazda.png" },
+  { name: "Renault", logoUrl: "/clientes-logos/renault.png" },
+  { name: "Subaru", logoUrl: "/clientes-logos/subaru.png" },
+  { name: "CGH", logoUrl: "/clientes-logos/cgh.png" },
+  { name: "GMW", logoUrl: "/clientes-logos/gmw.png" },
+  { name: "PBII", logoUrl: "/clientes-logos/pbii.png" },
+  { name: "Repsol", logoUrl: "/clientes-logos/repsol.png" },
 ];
 
 export default function BrandsSection() {
@@ -72,7 +72,7 @@ export default function BrandsSection() {
       </div>
 
       <div
-        className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+        className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10"
         ref={ref}
       >
         {/* Section Header */}
@@ -92,10 +92,10 @@ export default function BrandsSection() {
             Nuestros Clientes
           </motion.span>
           <motion.h2
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4 sm:mb-6"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 sm:mb-6"
             style={{ fontFamily: "var(--font-montserrat)" }}
           >
-            Marcas que <span className="text-gradient">Confían</span> en
+            Marcas que <span className="text-gradient">confían</span> en
             nosotros
           </motion.h2>
         </motion.div>
@@ -118,7 +118,7 @@ export default function BrandsSection() {
               {duplicatedBrands.map((brand, index) => (
                 <div
                   key={`${brand.name}-${index}`}
-                  className="flex items-center justify-center min-w-[150px] md:min-w-[200px] opacity-70 hover:opacity-100 transition-all duration-300 cursor-pointer hover:scale-110"
+                  className="flex items-center justify-center min-w-[150px] md:min-w-[200px]"
                 >
                   <div className="relative h-12 md:h-16 w-32 md:w-40">
                     <Image

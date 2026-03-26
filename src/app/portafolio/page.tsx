@@ -204,7 +204,7 @@ export default function PortafolioPage() {
           />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-8 relative z-10">
           <motion.div
             className="max-w-4xl mx-auto text-center"
             initial={{ opacity: 0, y: 30 }}
@@ -254,7 +254,7 @@ export default function PortafolioPage() {
 
       {/* Quick Stats */}
       <section className="py-6 sm:py-8 bg-white border-b border-gray-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-8">
           <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12">
             <div className="text-center">
               <div className="text-2xl sm:text-3xl font-bold text-black" style={{ fontFamily: 'var(--font-montserrat)' }}>500+</div>
@@ -278,7 +278,7 @@ export default function PortafolioPage() {
 
       {/* Filters & Projects */}
       <section ref={containerRef} className="py-12 sm:py-16 md:py-20 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-8">
           {/* Category Filters */}
           <motion.div
             className="flex flex-wrap gap-2 sm:gap-3 mb-8 sm:mb-10 justify-center"
@@ -621,7 +621,7 @@ export default function PortafolioPage() {
           />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-8 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

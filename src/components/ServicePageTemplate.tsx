@@ -5,7 +5,7 @@ import PricingSection, {
 } from "@/components/sections/PricingSection";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { motion, Variants } from "framer-motion";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import {
   ArrowRight,
   Award,
@@ -42,7 +42,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, useRef } from "react";
 
 // Icon mapping for serialization
 const iconMap: Record<string, LucideIcon> = {
@@ -142,6 +142,88 @@ const itemVariants: Variants = {
   },
 };
 
+function ProcessCard({
+  step,
+  index,
+  heroData,
+}: {
+  step: any;
+  index: number;
+  heroData: any;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["0 1", "0.5 0.5"],
+  });
+
+  const isEven = index % 2 === 0;
+
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], [100, 0]);
+  const x = useTransform(scrollYProgress, [0, 1], [isEven ? -50 : 50, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+
+  return (
+    <motion.div
+      ref={cardRef}
+      style={{ opacity, y, x, scale }}
+      className={`relative flex items-center justify-between mb-12 md:mb-20 ${
+        isEven ? "md:flex-row-reverse" : "md:flex-row"
+      } flex-row-reverse`}
+    >
+      <div
+        className="absolute left-[36px] md:left-1/2 w-10 h-10 rounded-full transform -translate-x-1/2 flex items-center justify-center border-4 border-white z-10 shadow-md"
+        style={{ backgroundColor: heroData.color }}
+      >
+        <div className="w-2.5 h-2.5 bg-white rounded-full" />
+      </div>
+
+      <div className="hidden md:block w-[45%]" />
+
+      <div className="w-full md:w-[45%] pl-[80px] md:pl-0">
+        <Card className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 relative border-0 border-t-4 border-transparent hover:border-[#FF6600] group overflow-hidden">
+          <CardContent className="p-5 sm:p-6 md:p-8">
+            <div
+              className="text-6xl sm:text-7xl font-bold opacity-5 absolute -bottom-2 -right-2 transition-transform duration-500 group-hover:scale-110"
+              style={{
+                color: heroData.color,
+                fontFamily: "var(--font-montserrat)",
+              }}
+            >
+              {step.step}
+            </div>
+
+            <div className="relative z-10">
+              <div
+                className="inline-block text-sm sm:text-base font-bold mb-3 px-3 py-1 rounded-full bg-slate-100"
+                style={{
+                  color: heroData.color,
+                  fontFamily: "var(--font-montserrat)",
+                }}
+              >
+                Paso {step.step}
+              </div>
+              <h3
+                className="text-xl sm:text-2xl font-bold text-black mb-3"
+                style={{ fontFamily: "var(--font-montserrat)" }}
+              >
+                {step.title}
+              </h3>
+              <p
+                className="text-sm sm:text-base text-gray-600 leading-relaxed"
+                style={{ fontFamily: "var(--font-inter)" }}
+              >
+                {step.description}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function ServicePageTemplate({
   children,
   heroData,
@@ -155,6 +237,12 @@ export default function ServicePageTemplate({
   relatedServices,
 }: ServicePageProps) {
   const IconComponent = iconMap[heroData.iconName] || TrendingUp;
+  const processRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: processRef,
+    offset: ["start center", "end center"],
+  });
 
   const fallbackVisualCards = [
     ...features.map((feature) => ({
@@ -182,7 +270,7 @@ export default function ServicePageTemplate({
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 md:pt-36 md:pb-24 overflow-hidden bg-linear-to-r from-white via-slate-50 to-cyan-50/40 min-h-[78vh] lg:min-h-[86vh] flex items-center">
+      <section className="relative pt-20 pb-12 sm:pt-28 sm:pb-16 md:pt-30 md:pb-20 overflow-hidden bg-linear-to-r from-white via-slate-50 to-cyan-50/40 min-h-[50vh] lg:min-h-[65vh] flex items-center">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
             className="absolute -top-40 -right-40 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full blur-3xl"
@@ -198,7 +286,7 @@ export default function ServicePageTemplate({
           />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
           <motion.div
             className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center"
             variants={containerVariants}
@@ -206,7 +294,10 @@ export default function ServicePageTemplate({
             animate="visible"
           >
             <div>
-              <motion.div variants={itemVariants} className="mb-4 sm:mb-5">
+              <motion.div
+                variants={itemVariants}
+                className="mb-4 sm:mb-5 flex flex-col items-center lg:items-start text-center lg:text-left"
+              >
                 <motion.div
                   className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center mb-4"
                   style={{ backgroundColor: `${heroData.color}15` }}
@@ -232,7 +323,7 @@ export default function ServicePageTemplate({
 
               <motion.h1
                 variants={itemVariants}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-5 sm:mb-6 leading-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-5 sm:mb-6 leading-tight text-center lg:text-left text-pretty"
                 style={{ fontFamily: "var(--font-montserrat)" }}
               >
                 {heroData.title}{" "}
@@ -243,7 +334,7 @@ export default function ServicePageTemplate({
 
               <motion.p
                 variants={itemVariants}
-                className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mb-7 sm:mb-8"
+                className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mb-5 sm:mb-6 text-center lg:text-left text-pretty mx-auto lg:mx-0"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 {heroData.description}
@@ -251,10 +342,10 @@ export default function ServicePageTemplate({
 
               <motion.div
                 variants={itemVariants}
-                className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 w-full max-w-2xl mb-7 sm:mb-8"
+                className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 w-full max-w-2xl mb-5 sm:mb-6"
               >
                 {stats.slice(0, 4).map((stat, index) => (
-                  <div key={index} className="text-left">
+                  <div key={index} className="text-center lg:text-left">
                     <div
                       className="text-3xl sm:text-4xl font-bold leading-none mb-1"
                       style={{
@@ -292,7 +383,7 @@ export default function ServicePageTemplate({
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-2 border-black text-black hover:bg-black hover:text-white font-semibold px-6 sm:px-8 py-4 sm:py-5 rounded-full w-full sm:w-auto min-h-13 text-sm sm:text-base"
+                  className="border border-black text-black hover:bg-black hover:text-white font-semibold px-6 sm:px-8 py-4 sm:py-5 rounded-full w-full sm:w-auto min-h-13 text-sm sm:text-base"
                   asChild
                 >
                   <Link href="#proceso">Ver Proceso</Link>
@@ -344,8 +435,11 @@ export default function ServicePageTemplate({
       </section>
 
       {/* Benefits Section */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        className="py-12 sm:py-16 md:py-20 lg:py-28 bg-slate-900 border-t-4"
+        style={{ borderColor: heroData.color }}
+      >
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -353,13 +447,14 @@ export default function ServicePageTemplate({
             viewport={{ once: true }}
           >
             <h2
-              className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 sm:mb-6"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6"
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
-              ¿Por qué elegir nuestro servicio?
+              ¿Por qué <span className="text-gradient">elegir</span> nuestro
+              servicio?
             </h2>
             <p
-              className="text-base sm:text-lg text-gray-600"
+              className="text-base sm:text-lg text-slate-300"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               Combinamos estrategia, creatividad y datos para entregarte
@@ -417,7 +512,7 @@ export default function ServicePageTemplate({
 
       {/* Features Section */}
       <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -428,7 +523,8 @@ export default function ServicePageTemplate({
               className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 sm:mb-6"
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
-              Qué incluye nuestro servicio
+              Qué <span className="text-gradient">incluye</span> nuestro
+              servicio
             </h2>
           </motion.div>
 
@@ -475,7 +571,7 @@ export default function ServicePageTemplate({
         id="proceso"
         className="py-12 sm:py-16 md:py-20 lg:py-28 bg-gray-50"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -486,7 +582,7 @@ export default function ServicePageTemplate({
               className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 sm:mb-6"
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
-              Nuestro Proceso
+              Nuestro <span className="text-gradient">proceso</span>
             </h2>
             <p
               className="text-base sm:text-lg text-gray-600"
@@ -496,50 +592,22 @@ export default function ServicePageTemplate({
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-            {process.map((step, index) => (
+          <div ref={processRef} className="relative max-w-4xl mx-auto py-10">
+            {/* Timeline Line Wrapper */}
+            <div className="absolute left-[36px] md:left-1/2 top-0 bottom-0 w-1 bg-gray-200 transform md:-translate-x-1/2 rounded-full overflow-hidden">
               <motion.div
+                className="w-full bg-gradient-to-b from-[#FF6600] to-[#00BFFF] origin-top"
+                style={{ scaleY: scrollYProgress, height: "100%" }}
+              />
+            </div>
+
+            {process.map((step, index) => (
+              <ProcessCard
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
-              >
-                <Card className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 h-full relative">
-                  <CardContent className="p-4 sm:p-6 md:p-8">
-                    <div
-                      className="text-4xl sm:text-5xl font-bold opacity-10 absolute top-4 right-4"
-                      style={{
-                        color: heroData.color,
-                        fontFamily: "var(--font-montserrat)",
-                      }}
-                    >
-                      {step.step}
-                    </div>
-                    <div
-                      className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4"
-                      style={{
-                        color: heroData.color,
-                        fontFamily: "var(--font-montserrat)",
-                      }}
-                    >
-                      {step.step}
-                    </div>
-                    <h3
-                      className="text-lg sm:text-xl font-bold text-black mb-2 sm:mb-3"
-                      style={{ fontFamily: "var(--font-montserrat)" }}
-                    >
-                      {step.title}
-                    </h3>
-                    <p
-                      className="text-sm text-gray-600"
-                      style={{ fontFamily: "var(--font-inter)" }}
-                    >
-                      {step.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                step={step}
+                index={index}
+                heroData={heroData}
+              />
             ))}
           </div>
         </div>
@@ -547,7 +615,7 @@ export default function ServicePageTemplate({
 
       {/* Testimonials Section */}
       <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -558,7 +626,8 @@ export default function ServicePageTemplate({
               className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 sm:mb-6"
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
-              Lo que dicen nuestros clientes
+              Lo que dicen nuestros{" "}
+              <span className="text-gradient">clientes</span>
             </h2>
           </motion.div>
 
@@ -601,14 +670,14 @@ export default function ServicePageTemplate({
         </div>
       </section>
 
-      {/* Pricing Section (only visible if pricingParams are provided) */}
-      {pricingParams && pricingParams.length > 0 && (
+      {/* Pricing Section */}
+      {(!pricingParams || pricingParams.length > 0) && (
         <PricingSection plans={pricingParams} />
       )}
 
       {/* FAQ Section */}
       <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -619,7 +688,7 @@ export default function ServicePageTemplate({
               className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 sm:mb-6"
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
-              Preguntas Frecuentes
+              Preguntas <span className="text-gradient">frecuentes</span>
             </h2>
           </motion.div>
 
@@ -668,7 +737,7 @@ export default function ServicePageTemplate({
           />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -676,10 +745,10 @@ export default function ServicePageTemplate({
             className="max-w-3xl mx-auto"
           >
             <h2
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6"
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
-              ¿Listo para empezar?
+              ¿Listo para <span className="text-gradient">empezar</span>?
             </h2>
             <p
               className="text-base sm:text-lg text-gray-400 mb-6 sm:mb-8 px-4"
@@ -707,7 +776,7 @@ export default function ServicePageTemplate({
 
       {/* Related Services */}
       <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -718,7 +787,7 @@ export default function ServicePageTemplate({
               className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 sm:mb-6"
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
-              Servicios Relacionados
+              Servicios <span className="text-gradient">relacionados</span>
             </h2>
           </motion.div>
 
