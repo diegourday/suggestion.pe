@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 export default function MerchandisingPage() {
   const heroData = {
     badge: 'Merchandising',
-    title: 'Productos que Refuerzan tu',
-    highlightedWord: 'Marca',
+    title: 'Productos que refuerzan tu',
+    highlightedWord: 'marca',
     subtitle: 'Merch que se usa, no se guarda',
     description: 'Creamos y producimos artículos promocionales que la gente realmente quiere usar. Merchandising que genera recordación y fidelidad.',
     cta: 'Solicitar Catálogo',

@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 export default function EstructurasPublicitariasPage() {
   const heroData = {
     badge: 'Estructuras Publicitarias',
-    title: 'Publicidad de Gran',
-    highlightedWord: 'Impacto',
+    title: 'Publicidad de gran',
+    highlightedWord: 'impacto',
     subtitle: 'Tu mensaje, imposible de ignorar',
     description: 'Gestionamos publicidad exterior en las mejores ubicaciones. Billboards, espectaculares, mupis y pantallas LED que capturan la atención de tu audiencia.',
     cta: 'Ver Disponibilidad',

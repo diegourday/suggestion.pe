@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 export default function BrandingPage() {
   const heroData = {
     badge: 'Branding',
-    title: 'Marcas que Dejan',
-    highlightedWord: 'Huella',
+    title: 'Marcas que dejan',
+    highlightedWord: 'huella',
     subtitle: 'Identidad que perdura',
     description: 'Diseñamos identidades visuales que conectan emocionalmente con tu audiencia. Tu marca no solo se ve bien, se recuerda.',
     cta: 'Crea tu Identidad',
@@ -51,7 +51,7 @@ export default function BrandingPage() {
   ];
 
   const stats = [
-    { value: '200+', label: 'Marcas creadas' },
+    { value: '100+', label: 'Marcas creadas' },
     { value: '95%', label: 'Clientes satisfechos' },
     { value: '50+', label: 'Rebrandings' },
     { value: '100%', label: 'Originales' },
@@ -79,6 +79,7 @@ export default function BrandingPage() {
 
   return (
     <ServicePageTemplate
+      showIcaBadge={true}
       heroData={heroData}
       benefits={benefits}
       features={features}

@@ -179,16 +179,66 @@ export default function PricingSection({
                 >
                   {plan.description}
                 </p>
-                <div className="flex items-baseline text-black">
-                  <span
-                    className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
-                    {plan.price}
-                  </span>
-                  <span className="text-sm sm:text-base text-gray-500 ml-1 font-medium">
-                    {plan.frequency}
-                  </span>
+
+                <div className="flex flex-col">
+                  {(() => {
+                    const priceMatch = plan.price.match(
+                      /^([^\d]*)(\d[,\d]*\.?\d*)(.*)$/,
+                    );
+                    if (priceMatch) {
+                      const prefix = priceMatch[1] || "";
+                      const numStr = priceMatch[2].replace(/,/g, "");
+                      const suffix = priceMatch[3] || "";
+                      const currentVal = parseFloat(numStr);
+
+                      let factor = 1;
+                      let discountBadge = "";
+
+                      if (index === 0) {
+                        factor = 1 / 0.5;
+                        discountBadge = "-50%";
+                      } else if (index === 1) {
+                        factor = 1 / 0.6;
+                        discountBadge = "-40%";
+                      } else if (index === 2) {
+                        factor = 1 / 0.7;
+                        discountBadge = "-30%";
+                      }
+
+                      if (factor !== 1 && !isNaN(currentVal)) {
+                        // Redondeado a la decena más cercana para que no quede con decimales raros (ej. 5833 -> 5830)
+                        const originalVal =
+                          Math.round((currentVal * factor) / 10) * 10;
+                        return (
+                          <div className="flex items-center gap-2 mb-1">
+                            <span
+                              className="text-sm sm:text-base text-gray-400 line-through decoration-gray-400/70 font-medium"
+                              style={{ fontFamily: "var(--font-inter)" }}
+                            >
+                              {prefix}
+                              {originalVal.toLocaleString("en-US")}
+                              {suffix}
+                            </span>
+                            <span className="text-[10px] sm:text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                              {discountBadge}
+                            </span>
+                          </div>
+                        );
+                      }
+                    }
+                    return null;
+                  })()}
+                  <div className="flex items-baseline text-black">
+                    <span
+                      className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight"
+                      style={{ fontFamily: "var(--font-montserrat)" }}
+                    >
+                      {plan.price}
+                    </span>
+                    <span className="text-sm sm:text-base text-gray-500 ml-1 font-medium">
+                      {plan.frequency}
+                    </span>
+                  </div>
                 </div>
               </div>
 

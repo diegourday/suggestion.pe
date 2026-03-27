@@ -5,7 +5,21 @@ import PricingSection, {
 } from "@/components/sections/PricingSection";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { motion, useScroll, useTransform, Variants } from "framer-motion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  Variants,
+  useMotionValueEvent,
+  useInView,
+  animate,
+} from "framer-motion";
 import {
   ArrowRight,
   Award,
@@ -42,7 +56,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { ReactNode, useRef } from "react";
+import { ReactNode, useRef, useState, useEffect } from "react";
 
 // Icon mapping for serialization
 const iconMap: Record<string, LucideIcon> = {
@@ -80,6 +94,7 @@ const iconMap: Record<string, LucideIcon> = {
 
 interface ServicePageProps {
   children?: ReactNode;
+  showIcaBadge?: boolean;
   heroData: {
     badge: string;
     title: string;
@@ -142,6 +157,46 @@ const itemVariants: Variants = {
   },
 };
 
+function AnimatedStat({ value }: { value: string }) {
+  const match = value.match(/^([^\d]*)(\d[,\d]*\.?\d*)(.*)$/);
+  
+  const nodeRef = useRef<HTMLSpanElement>(null);
+  const inView = useInView(nodeRef, { once: true });
+
+  useEffect(() => {
+    if (match && inView && nodeRef.current) {
+      const target = parseFloat(match[2].replace(/,/g, ""));
+      const isFloat = match[2].includes(".");
+      const hasComma = match[2].includes(",");
+
+      const controls = animate(0, target, {
+        duration: 2.5,
+        ease: [0.16, 1, 0.3, 1], // Custom easing: starts fast, ends very slow
+        onUpdate(val) {
+          if (nodeRef.current) {
+            let displayVal = isFloat ? val.toFixed(1) : Math.round(val).toString();
+            if (hasComma && !isFloat) {
+              displayVal = Math.round(val).toLocaleString('en-US');
+            }
+            nodeRef.current.textContent = displayVal;
+          }
+        },
+      });
+      return () => controls.stop();
+    }
+  }, [match, inView]);
+
+  if (!match) return <>{value}</>;
+
+  return (
+    <span>
+      {match[1]}
+      <span ref={nodeRef}>0</span>
+      {match[3]}
+    </span>
+  );
+}
+
 function ProcessCard({
   step,
   index,
@@ -157,31 +212,70 @@ function ProcessCard({
     offset: ["0 1", "0.5 0.5"],
   });
 
+  const [isFinished, setIsFinished] = useState(false);
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (latest >= 1 && !isFinished) setIsFinished(true);
+    else if (latest < 1 && isFinished) setIsFinished(false);
+  });
+
   const isEven = index % 2 === 0;
 
-  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const y = useTransform(scrollYProgress, [0, 1], [100, 0]);
-  const x = useTransform(scrollYProgress, [0, 1], [isEven ? -50 : 50, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+  const cardOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const cardY = useTransform(scrollYProgress, [0, 1], [100, 0]);
+  const cardX = useTransform(scrollYProgress, [0, 1], [isEven ? -50 : 50, 0]);
+  const cardScale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+
+  const dotScale = useTransform(scrollYProgress, [0.5, 1], [0, 1]);
+  const dotOpacity = useTransform(scrollYProgress, [0.5, 1], [0, 1]);
 
   return (
-    <motion.div
+    <div
       ref={cardRef}
-      style={{ opacity, y, x, scale }}
       className={`relative flex items-center justify-between mb-12 md:mb-20 ${
         isEven ? "md:flex-row-reverse" : "md:flex-row"
       } flex-row-reverse`}
     >
-      <div
-        className="absolute left-[36px] md:left-1/2 w-10 h-10 rounded-full transform -translate-x-1/2 flex items-center justify-center border-4 border-white z-10 shadow-md"
-        style={{ backgroundColor: heroData.color }}
+      <motion.div
+        style={{ scale: dotScale, opacity: dotOpacity }}
+        className="absolute left-[36px] md:left-1/2 transform -translate-x-1/2 z-20 flex items-center justify-center"
       >
-        <div className="w-2.5 h-2.5 bg-white rounded-full" />
-      </div>
+        <motion.div
+          className="w-10 h-10 rounded-full flex items-center justify-center border-4 border-white shadow-md relative"
+          style={{ backgroundColor: heroData.color }}
+          animate={
+            isFinished
+              ? {
+                  boxShadow: [
+                    "0px 0px 0px 0px rgba(0,0,0,0)",
+                    `0px 0px 0px 10px ${heroData.color}40`,
+                    "0px 0px 0px 20px rgba(0,0,0,0)",
+                  ],
+                }
+              : {}
+          }
+          transition={{ duration: 1.5, repeat: 0 }}
+        >
+          <div className="w-2.5 h-2.5 bg-white rounded-full relative z-10" />
+
+          {isFinished && (
+            <motion.div
+              className="absolute inset-0 rounded-full"
+              style={{ backgroundColor: heroData.color }}
+              initial={{ scale: 1, opacity: 0.8 }}
+              animate={{ scale: 2, opacity: 0 }}
+              transition={{ duration: 1.5, repeat: 0, ease: "easeOut" }}
+            />
+          )}
+        </motion.div>
+      </motion.div>
 
       <div className="hidden md:block w-[45%]" />
 
-      <div className="w-full md:w-[45%] pl-[80px] md:pl-0">
+      <motion.div
+        style={{ opacity: cardOpacity, y: cardY, x: cardX, scale: cardScale }}
+        className="w-full md:w-[45%] pl-[80px] md:pl-0"
+      >
         <Card className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 relative border-0 border-t-4 border-transparent hover:border-[#FF6600] group overflow-hidden">
           <CardContent className="p-5 sm:p-6 md:p-8">
             <div
@@ -219,13 +313,14 @@ function ProcessCard({
             </div>
           </CardContent>
         </Card>
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 }
 
 export default function ServicePageTemplate({
   children,
+  showIcaBadge,
   heroData,
   benefits,
   features,
@@ -353,7 +448,7 @@ export default function ServicePageTemplate({
                         fontFamily: "var(--font-montserrat)",
                       }}
                     >
-                      {stat.value}
+                      <AnimatedStat value={stat.value} />
                     </div>
                     <div
                       className="text-sm text-gray-600"
@@ -386,14 +481,22 @@ export default function ServicePageTemplate({
                   className="border border-black text-black hover:bg-black hover:text-white font-semibold px-6 sm:px-8 py-4 sm:py-5 rounded-full w-full sm:w-auto min-h-13 text-sm sm:text-base"
                   asChild
                 >
-                  <Link href="#proceso">Ver Proceso</Link>
+                  <Link href="#proceso">Ver proceso</Link>
                 </Button>
               </motion.div>
             </div>
 
             <motion.div variants={itemVariants} className="w-full">
               {children || (
-                <div className="relative mx-auto w-full max-w-xl rounded-3xl border border-black/10 bg-slate-100 p-5 sm:p-6">
+                <div className="relative mx-auto w-full max-w-xl rounded-3xl border border-black/10 bg-slate-100 p-5 sm:p-6 mt-6 sm:mt-0">
+                  {showIcaBadge && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 sm:top-0 sm:right-0 sm:translate-x-1/2 sm:-translate-y-1/2 sm:left-auto rounded-xl bg-emerald-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 z-10 whitespace-nowrap">
+                      <span className="inline-flex items-center gap-1">
+                        <Star className="h-4 w-4 fill-current" />
+                        #1 en Ica
+                      </span>
+                    </div>
+                  )}
                   <div className="grid grid-cols-2 gap-3 sm:gap-4">
                     {heroVisualCards.map((card, index) => (
                       <div
@@ -436,7 +539,7 @@ export default function ServicePageTemplate({
 
       {/* Benefits Section */}
       <section
-        className="py-12 sm:py-16 md:py-20 lg:py-28 bg-slate-900 border-t-4"
+        className="py-12 sm:py-16 md:py-20 lg:py-28 bg-black border-t-4"
         style={{ borderColor: heroData.color }}
       >
         <div className="container mx-auto px-6 sm:px-8 lg:px-12">
@@ -676,7 +779,7 @@ export default function ServicePageTemplate({
       )}
 
       {/* FAQ Section */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-gray-50">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-white">
         <div className="container mx-auto px-6 sm:px-8 lg:px-12">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16"
@@ -692,33 +795,37 @@ export default function ServicePageTemplate({
             </h2>
           </motion.div>
 
-          <div className="max-w-3xl mx-auto space-y-3 sm:space-y-4">
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="bg-white shadow">
-                  <CardContent className="p-4 sm:p-6">
-                    <h3
-                      className="text-base sm:text-lg font-bold text-black mb-2 sm:mb-3"
-                      style={{ fontFamily: "var(--font-montserrat)" }}
-                    >
-                      {faq.question}
-                    </h3>
-                    <p
-                      className="text-sm sm:text-base text-gray-600"
-                      style={{ fontFamily: "var(--font-inter)" }}
-                    >
-                      {faq.answer}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="multiple" className="space-y-3 sm:space-y-4">
+              {faqs.map((faq, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <AccordionItem 
+                    value={`item-${index}`} 
+                    className="bg-white border rounded-xl px-4 sm:px-6 shadow-sm data-[state=open]:border-[#FF6600]/30 transition-colors"
+                  >
+                    <AccordionTrigger className="text-base sm:text-lg font-bold text-black hover:no-underline [&[data-state=open]]:text-[#FF6600]">
+                      <span className="text-left" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        {faq.question}
+                      </span>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p
+                        className="text-sm sm:text-base text-gray-600 pt-2 pb-4"
+                        style={{ fontFamily: "var(--font-inter)" }}
+                      >
+                        {faq.answer}
+                      </p>
+                    </AccordionContent>
+                  </AccordionItem>
+                </motion.div>
+              ))}
+            </Accordion>
           </div>
         </div>
       </section>

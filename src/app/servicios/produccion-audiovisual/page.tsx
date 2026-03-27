@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 export default function ProduccionAudiovisualPage() {
   const heroData = {
     badge: 'Producción Audiovisual',
-    title: 'Contenido Visual de',
-    highlightedWord: 'Impacto',
+    title: 'Contenido visual de',
+    highlightedWord: 'impacto',
     subtitle: 'Tu historia en movimiento',
     description: 'Creamos contenido audiovisual que conecta emocionalmente. Videos que informan, entretienen y convierten. Fotografía que detiene el scroll.',
     cta: 'Crea tu Contenido',

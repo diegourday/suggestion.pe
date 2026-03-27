@@ -16,7 +16,7 @@ export default function CRMAutomatizacionPage() {
   const heroData = {
     badge: 'CRM & Automatización',
     title: 'Automatiza y',
-    highlightedWord: 'Escala',
+    highlightedWord: 'escala',
     subtitle: 'Menos trabajo manual, más resultados',
     description: 'Implementamos sistemas CRM y automatizaciones que trabajan 24/7. Tu equipo se enfoca en cerrar ventas mientras el sistema genera y nutre leads.',
     cta: 'Automatiza Ahora',
@@ -79,6 +79,7 @@ export default function CRMAutomatizacionPage() {
 
   return (
     <ServicePageTemplate
+      showIcaBadge={true}
       heroData={heroData}
       benefits={benefits}
       features={features}

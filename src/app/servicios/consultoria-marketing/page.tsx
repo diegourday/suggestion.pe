@@ -24,7 +24,7 @@ export default function ConsultoriaPage() {
   const heroData = {
     badge: "Consultoría",
     title: "Consultoría",
-    highlightedWord: "Estratégica",
+    highlightedWord: "estratégica",
     subtitle: "Conocimiento que transforma",
     description:
       "Asesoría personalizada de profesionales con experiencia real. Auditorías, planes de acción y acompañamiento para maximizar tu inversión en marketing.",
@@ -247,6 +247,7 @@ export default function ConsultoriaPage() {
 
   return (
     <ServicePageTemplate
+      showIcaBadge={true}
       heroData={heroData}
       benefits={benefits}
       features={features}

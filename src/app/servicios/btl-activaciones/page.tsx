@@ -16,7 +16,7 @@ export default function BTLActivacionesPage() {
   const heroData = {
     badge: 'BTL y Activaciones',
     title: 'Experiencias que',
-    highlightedWord: 'Conectan',
+    highlightedWord: 'conectan',
     subtitle: 'Tu marca, en vivo y en directo',
     description: 'Creamos experiencias presenciales que dejan huella. Activaciones, sampling, roadshows y eventos que generan conexión emocional real con tu audiencia.',
     cta: 'Planifica tu Activación',

@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 export default function InvestigacionMercadoPage() {
   const heroData = {
     badge: 'Investigación de Mercado',
-    title: 'Datos que Impulsan',
-    highlightedWord: 'Decisiones',
+    title: 'Datos que impulsan',
+    highlightedWord: 'decisiones',
     subtitle: 'Información que transforma',
     description: 'Investigamos tu mercado, competencia y consumidores para darte insights accionables. Decisiones basadas en datos, no suposiciones.',
     cta: 'Investiga tu Mercado',

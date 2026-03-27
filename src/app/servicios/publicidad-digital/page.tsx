@@ -26,7 +26,7 @@ export default function PublicidadDigitalPage() {
   const heroData = {
     badge: "Publicidad Digital",
     title: "Publicidad con",
-    highlightedWord: "ROI Medible",
+    highlightedWord: "ROI medible",
     subtitle: "Campañas que pagan",
     description:
       "Diseñamos y gestionamos campañas de publicidad digital que generan retorno. Cada peso invertido se optimiza para máximo rendimiento.",

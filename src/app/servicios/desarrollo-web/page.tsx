@@ -25,8 +25,8 @@ export const metadata: Metadata = {
 export default function DesarrolloWebPage() {
   const heroData = {
     badge: "Desarrollo Web",
-    title: "Sitios Web que",
-    highlightedWord: "Convierten",
+    title: "Sitios web que",
+    highlightedWord: "convierten",
     subtitle: "Rápidos, optimizados, efectivos",
     description:
       "Desarrollamos sitios web que no solo se ven bien, sino que funcionan. Optimizados para SEO, velocidad y conversión.",
@@ -161,7 +161,7 @@ export default function DesarrolloWebPage() {
     {
       question: "¿Cuánto cuesta un sitio web?",
       answer:
-        "Depende del alcance. Una landing page puede empezar desde $1,500, un sitio corporativo desde $3,000, y un e-commerce desde $5,000.",
+        "Depende del alcance. Una landing page puede empezar desde S/1,500, un sitio corporativo desde S/3,000, y un e-commerce desde S/5,000.",
     },
     {
       question: "¿Qué tecnologías utilizan?",
@@ -255,6 +255,7 @@ export default function DesarrolloWebPage() {
 
   return (
     <ServicePageTemplate
+      showIcaBadge={true}
       heroData={heroData}
       benefits={benefits}
       features={features}

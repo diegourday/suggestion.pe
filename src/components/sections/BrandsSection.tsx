@@ -48,7 +48,7 @@ export default function BrandsSection() {
   const duplicatedBrands = [...brands, ...brands, ...brands];
 
   return (
-    <section className="pt-12 sm:pt-16 md:pt-20 pb-24 sm:pb-32 md:pb-40 bg-white relative overflow-hidden">
+    <section className="py-24 sm:py-32 md:py-40 bg-white relative overflow-hidden">
       {/* Background decoration igual que ServicesSection para mantener misma estética */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -89,7 +89,7 @@ export default function BrandsSection() {
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.2 }}
           >
-            Nuestros Clientes
+            Nuestros clientes
           </motion.span>
           <motion.h2
             className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 sm:mb-6"

@@ -121,20 +121,11 @@ export default function Footer() {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <Link href="/" className="inline-flex items-center mb-4 sm:mb-6">
-                <span
-                  className="text-lg sm:text-xl font-bold"
-                  style={{ fontFamily: "var(--font-montserrat)" }}
-                >
-                  <span className="text-white">Suggest</span>
-                  <span className="relative inline-block align-top">
-                    <span className="text-white">i</span>
-                    <span
-                      className="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full"
-                      style={{ backgroundColor: "#00BFFF" }}
-                    />
-                  </span>
-                  <span className="text-white">on</span>
-                </span>
+                <img
+                  src="/logo-blanco.png"
+                  alt="Suggestion Logo"
+                  className="h-5 sm:h-6 w-auto"
+                />
               </Link>
             </motion.div>
             <p className="text-gray-400 mb-4 sm:mb-6 max-w-sm text-sm sm:text-base leading-relaxed">
@@ -277,7 +268,7 @@ export default function Footer() {
               href="#"
               className="text-gray-500 hover:text-[#00BFFF] text-xs sm:text-sm transition-colors py-2 min-h-[36px]"
             >
-              Términos de Servicio
+              Términos de servicio
             </Link>
           </div>
         </motion.div>

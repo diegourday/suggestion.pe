@@ -115,7 +115,7 @@ export default function ProcessSection() {
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4 sm:mb-6"
             style={{ fontFamily: "var(--font-montserrat)" }}
           >
-            De la Idea al <span className="text-gradient">Resultado</span>
+            De la idea al <span className="text-gradient">resultado</span>
           </motion.h2>
           <motion.p
             className="text-base sm:text-lg text-gray-600 px-4"

@@ -126,7 +126,7 @@ export default function CTASection() {
               className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6"
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
-              Hablemos de tu <span className="text-gradient">Proyecto</span>
+              Hablemos de tu <span className="text-gradient">proyecto</span>
             </motion.h2>
             <motion.p
               className="text-base sm:text-lg text-gray-400 mb-6 sm:mb-8"
@@ -180,18 +180,44 @@ export default function CTASection() {
             >
               <div className="flex items-center gap-4">
                 <div className="flex -space-x-3">
-                  {["M", "C", "A", "+"].map((letter, i) => (
+                  {[
+                    {
+                      type: "image",
+                      src: "/clientes-logos/mazda.png",
+                      alt: "Mazda",
+                    },
+                    {
+                      type: "image",
+                      src: "/clientes-logos/repsol.png",
+                      alt: "Repsol",
+                    },
+                    {
+                      type: "image",
+                      src: "/clientes-logos/pbii.png",
+                      alt: "PBII",
+                    },
+                    { type: "text", text: "+" },
+                  ].map((item, i) => (
                     <motion.div
                       key={i}
-                      className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold border-2 border-black"
+                      className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold border-2 border-black overflow-hidden relative"
                       style={{
-                        backgroundColor: i === 3 ? "#FF6600" : "#333",
+                        backgroundColor:
+                          item.type === "text" ? "#FF6600" : "#ffffff",
                         color: "white",
                         fontFamily: "var(--font-montserrat)",
                       }}
                       whileHover={{ scale: 1.1, zIndex: 10 }}
                     >
-                      {letter}
+                      {item.type === "text" ? (
+                        item.text
+                      ) : (
+                        <img
+                          src={item.src}
+                          alt={item.alt}
+                          className="w-full h-full object-contain p-1.5"
+                        />
+                      )}
                     </motion.div>
                   ))}
                 </div>
@@ -199,7 +225,7 @@ export default function CTASection() {
                   className="text-xs sm:text-sm text-gray-500"
                   style={{ fontFamily: "var(--font-inter)" }}
                 >
-                  +150 clientes satisfechos
+                  +50 clientes satisfechos
                 </span>
               </div>
             </motion.div>
@@ -207,7 +233,7 @@ export default function CTASection() {
 
           {/* Right Content - Form */}
           <motion.div variants={itemVariants} className="px-2 sm:px-0">
-            <Card className="bg-white/5 backdrop-blur-sm border-white/10 overflow-hidden">
+            <Card className="bg-white/5 backdrop-blur-sm border-white/10 overflow-hidden py-0 border-0">
               <CardContent className="p-4 sm:p-6 md:p-8 relative">
                 {/* Animated border */}
                 <motion.div

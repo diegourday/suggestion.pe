@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 export default function MaterialPOPPage() {
   const heroData = {
     badge: 'Material POP',
-    title: 'Destaca en el Punto de',
-    highlightedWord: 'Venta',
+    title: 'Destaca en el punto de',
+    highlightedWord: 'venta',
     subtitle: 'El último paso antes de la compra',
     description: 'Diseñamos y producimos materiales POP que capturan la atención en el momento decisivo. Displays, exhibidores y más para que tu producto sea el elegido.',
     cta: 'Solicitar Propuesta',

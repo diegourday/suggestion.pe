@@ -24,8 +24,8 @@ export const metadata: Metadata = {
 export default function SEOPage() {
   const heroData = {
     badge: "SEO",
-    title: "Posicionamiento que te Hace",
-    highlightedWord: "Visible",
+    title: "Posicionamiento que te hace",
+    highlightedWord: "visible",
     subtitle: "Cuando te buscan, te encuentran",
     description:
       "Posicionamos tu sitio web en los primeros resultados de Google. Tráfico orgánico de alta calidad que genera leads y ventas de forma sostenida.",
@@ -254,6 +254,7 @@ export default function SEOPage() {
 
   return (
     <ServicePageTemplate
+      showIcaBadge={true}
       heroData={heroData}
       benefits={benefits}
       features={features}

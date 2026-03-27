@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 export default function PublicidadMovilPage() {
   const heroData = {
     badge: 'Publicidad Móvil',
-    title: 'Tu Marca en',
-    highlightedWord: 'Movimiento',
+    title: 'Tu marca en',
+    highlightedWord: 'movimiento',
     subtitle: 'Lleva tu mensaje más lejos',
     description: 'Publicidad que va donde está tu audiencia. Vehículos, pantallas LED móviles y más formatos que recorren la ciudad generando impacto.',
     cta: 'Planifica tu Ruta',

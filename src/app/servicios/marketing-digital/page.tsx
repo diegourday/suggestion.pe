@@ -23,8 +23,8 @@ export const metadata: Metadata = {
 export default function MarketingDigitalPage() {
   const heroData = {
     badge: "Marketing Digital",
-    title: "Marketing Digital que",
-    highlightedWord: "Transforma",
+    title: "Marketing digital que",
+    highlightedWord: "transforma",
     subtitle: "Estrategias integrales para tu negocio",
     description:
       "Transformamos tu presencia digital en resultados medibles. Estrategias personalizadas que conectan con tu audiencia y generan crecimiento sostenible.",
@@ -259,6 +259,7 @@ export default function MarketingDigitalPage() {
 
   return (
     <ServicePageTemplate
+      showIcaBadge={true}
       heroData={heroData}
       benefits={benefits}
       features={features}

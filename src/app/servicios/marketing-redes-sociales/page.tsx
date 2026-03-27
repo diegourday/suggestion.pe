@@ -24,8 +24,8 @@ export const metadata: Metadata = {
 export default function RedesSocialesPage() {
   const heroData = {
     badge: "Redes Sociales",
-    title: "Redes Sociales que",
-    highlightedWord: "Conectan",
+    title: "Redes sociales que",
+    highlightedWord: "conectan",
     subtitle: "Conexión auténtica con tu audiencia",
     description:
       "Transformamos tu presencia en redes sociales en una comunidad activa y comprometida. Contenido estratégico que genera conversación y conversión.",
