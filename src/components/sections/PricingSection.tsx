@@ -5,59 +5,6 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2 } from "lucide-react";
 
-const defaultPricingPlans: PricingPlan[] = [
-  {
-    name: "Starter",
-    description: "Ideal para emprendedores",
-    price: "S/1,500",
-    frequency: "/mes",
-    features: [
-      "2 redes sociales",
-      "8 publicaciones/mes",
-      "Reporte mensual",
-      "1 campaña publicitaria",
-      "SEO básico",
-    ],
-    buttonText: "Solicitar este plan",
-    isPopular: false,
-    buttonVariant: "outline" as const,
-  },
-  {
-    name: "Business",
-    description: "Para pymes en crecimiento",
-    price: "S/3,500",
-    frequency: "/mes",
-    features: [
-      "4 redes sociales",
-      "16 publicaciones/mes",
-      "Reporte quincenal",
-      "3 campañas publicitarias",
-      "SEO intermedio",
-      "Email marketing",
-    ],
-    buttonText: "Solicitar este plan",
-    isPopular: true,
-    buttonVariant: "default" as const,
-  },
-  {
-    name: "Enterprise",
-    description: "Estrategia completa",
-    price: "S/7,500",
-    frequency: "/mes",
-    features: [
-      "Todas las redes",
-      "Publicaciones diarias",
-      "Reporte semanal",
-      "Campañas ilimitadas",
-      "SEO avanzado",
-      "Consultoría dedicada",
-    ],
-    buttonText: "Solicitar este plan",
-    isPopular: false,
-    buttonVariant: "outline" as const,
-  },
-];
-
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -92,11 +39,13 @@ interface PricingSectionProps {
   plans?: PricingPlan[];
 }
 
-export default function PricingSection({
-  plans = defaultPricingPlans,
-}: PricingSectionProps) {
+export default function PricingSection({ plans }: PricingSectionProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  if (!plans || plans.length === 0) {
+    return null;
+  }
 
   return (
     <section
@@ -152,15 +101,15 @@ export default function PricingSection({
             <motion.div
               key={index}
               variants={itemVariants}
-              className={`relative flex flex-col p-6 sm:p-8 bg-white rounded-3xl mx-auto w-full max-w-[300px] md:max-w-none ${
+              className={`relative flex flex-col p-6 sm:p-8 bg-white rounded-3xl mx-auto w-full max-w-75 md:max-w-none ${
                 plan.isPopular
-                  ? "md:-mt-8 shadow-[0_20px_40px_-15px_rgba(255,102,0,0.15)] ring-2 ring-[#FF6600]"
+                  ? "md:-mt-8 shadow-[0_20px_40px_-15px_rgba(255,102,0,0.15)] ring-2 ring-orange"
                   : "border border-gray-100 shadow-xl shadow-black/5"
               }`}
             >
               {plan.isPopular && (
                 <div className="absolute -top-4 left-0 right-0 flex justify-center z-10">
-                  <span className="bg-gradient-to-r from-[#FF6600] to-[#00BFFF] text-white text-xs sm:text-sm font-bold uppercase tracking-wider py-1.5 px-6 rounded-full shadow-lg">
+                  <span className="bg-linear-to-r from-orange to-cyan text-white text-xs sm:text-sm font-bold uppercase tracking-wider py-1.5 px-6 rounded-full shadow-lg">
                     Más popular
                   </span>
                 </div>
@@ -263,7 +212,7 @@ export default function PricingSection({
                   variant={plan.buttonVariant}
                   className={`w-full py-6 text-sm sm:text-base font-semibold rounded-xl transition-all duration-300 ${
                     plan.isPopular
-                      ? "bg-gradient-to-r from-[#FF6600] to-[#00BFFF] text-white hover:scale-[1.02] hover:shadow-lg hover:shadow-[#FF6600]/25 border-0"
+                      ? "bg-linear-to-r from-orange to-cyan text-white hover:scale-[1.02] hover:shadow-lg hover:shadow-orange/25 border-0"
                       : "border-2 border-slate-200 text-black hover:border-black hover:bg-black hover:text-white"
                   }`}
                 >

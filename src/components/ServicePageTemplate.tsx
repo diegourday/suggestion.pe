@@ -159,7 +159,7 @@ const itemVariants: Variants = {
 
 function AnimatedStat({ value }: { value: string }) {
   const match = value.match(/^([^\d]*)(\d[,\d]*\.?\d*)(.*)$/);
-  
+
   const nodeRef = useRef<HTMLSpanElement>(null);
   const inView = useInView(nodeRef, { once: true });
 
@@ -174,9 +174,11 @@ function AnimatedStat({ value }: { value: string }) {
         ease: [0.16, 1, 0.3, 1], // Custom easing: starts fast, ends very slow
         onUpdate(val) {
           if (nodeRef.current) {
-            let displayVal = isFloat ? val.toFixed(1) : Math.round(val).toString();
+            let displayVal = isFloat
+              ? val.toFixed(1)
+              : Math.round(val).toString();
             if (hasComma && !isFloat) {
-              displayVal = Math.round(val).toLocaleString('en-US');
+              displayVal = Math.round(val).toLocaleString("en-US");
             }
             nodeRef.current.textContent = displayVal;
           }
@@ -774,7 +776,7 @@ export default function ServicePageTemplate({
       </section>
 
       {/* Pricing Section */}
-      {(!pricingParams || pricingParams.length > 0) && (
+      {pricingParams && pricingParams.length > 0 && (
         <PricingSection plans={pricingParams} />
       )}
 
@@ -805,12 +807,15 @@ export default function ServicePageTemplate({
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <AccordionItem 
-                    value={`item-${index}`} 
+                  <AccordionItem
+                    value={`item-${index}`}
                     className="bg-white border rounded-xl px-4 sm:px-6 shadow-sm data-[state=open]:border-[#FF6600]/30 transition-colors"
                   >
                     <AccordionTrigger className="text-base sm:text-lg font-bold text-black hover:no-underline [&[data-state=open]]:text-[#FF6600]">
-                      <span className="text-left" style={{ fontFamily: "var(--font-montserrat)" }}>
+                      <span
+                        className="text-left"
+                        style={{ fontFamily: "var(--font-montserrat)" }}
+                      >
                         {faq.question}
                       </span>
                     </AccordionTrigger>

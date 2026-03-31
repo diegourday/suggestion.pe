@@ -1,80 +1,255 @@
-import { Metadata } from 'next';
-import ServicePageTemplate from '@/components/ServicePageTemplate';
+import { Metadata } from "next";
+import ServicePageTemplate from "@/components/ServicePageTemplate";
 
 export const metadata: Metadata = {
-  title: 'Producción Audiovisual | Suggestion',
-  description: 'Producción audiovisual profesional. Videos corporativos, publicidad, contenido para redes sociales, fotografía comercial y más.',
-  keywords: ['producción audiovisual', 'video corporativo', 'producción de video', 'fotografía comercial', 'video marketing'],
+  title: "Producción Audiovisual | Suggestion",
+  description:
+    "Producción audiovisual profesional. Videos corporativos, publicidad, contenido para redes sociales, fotografía comercial y más.",
+  keywords: [
+    "producción audiovisual",
+    "video corporativo",
+    "producción de video",
+    "fotografía comercial",
+    "video marketing",
+  ],
   openGraph: {
-    title: 'Producción Audiovisual | Suggestion',
-    description: 'Contenido visual de alto impacto que cuenta tu historia.',
-    type: 'website',
+    title: "Producción Audiovisual | Suggestion",
+    description: "Contenido visual de alto impacto que cuenta tu historia.",
+    type: "website",
   },
 };
 
 export default function ProduccionAudiovisualPage() {
   const heroData = {
-    badge: 'Producción Audiovisual',
-    title: 'Contenido visual de',
-    highlightedWord: 'impacto',
-    subtitle: 'Tu historia en movimiento',
-    description: 'Creamos contenido audiovisual que conecta emocionalmente. Videos que informan, entretienen y convierten. Fotografía que detiene el scroll.',
-    cta: 'Crea tu Contenido',
-    iconName: 'Video',
-    color: '#FF6600',
+    badge: "Producción Audiovisual",
+    title: "Contenido visual de",
+    highlightedWord: "impacto",
+    subtitle: "Tu historia en movimiento",
+    description:
+      "Creamos contenido audiovisual que conecta emocionalmente. Videos que informan, entretienen y convierten. Fotografía que detiene el scroll.",
+    cta: "Crea tu Contenido",
+    iconName: "Video",
+    color: "#FF6600",
   };
 
   const benefits = [
-    { title: 'Contenido que Engancha', description: 'El video retiene 95% más que el texto. Tu mensaje llega de verdad.', iconName: 'MousePointer' },
-    { title: 'Calidad Profesional', description: 'Equipo, técnica y experiencia para resultados que destacan.', iconName: 'Award' },
-    { title: 'Versatilidad Total', description: 'Un shooting, múltiples formatos para todos tus canales.', iconName: 'Briefcase' },
-    { title: 'Storytelling Efectivo', description: 'No solo grabamos. Creamos narrativas que conectan.', iconName: 'Video' },
+    {
+      title: "Contenido que Engancha",
+      description:
+        "El video retiene 95% más que el texto. Tu mensaje llega de verdad.",
+      iconName: "MousePointer",
+    },
+    {
+      title: "Calidad Profesional",
+      description:
+        "Equipo, técnica y experiencia para resultados que destacan.",
+      iconName: "Award",
+    },
+    {
+      title: "Versatilidad Total",
+      description: "Un shooting, múltiples formatos para todos tus canales.",
+      iconName: "Briefcase",
+    },
+    {
+      title: "Storytelling Efectivo",
+      description: "No solo grabamos. Creamos narrativas que conectan.",
+      iconName: "Video",
+    },
   ];
 
   const features = [
-    { title: 'Videos Corporativos', description: 'Presentación de empresa, cultura, testimonios de clientes.' },
-    { title: 'Publicidad en Video', description: 'Spots para TV, digital y redes sociales.' },
-    { title: 'Contenido Redes Sociales', description: 'Reels, TikToks, Stories y más para tu marca.' },
-    { title: 'Videos de Producto', description: 'Demostraciones, unboxings y reviews.' },
-    { title: 'Videos de Capacitación', description: 'Training interno, manuales en video.' },
-    { title: 'Eventos', description: 'Cobertura audiovisual de eventos presenciales y virtuales.' },
-    { title: 'Fotografía Comercial', description: 'Producto, lifestyle, retratos corporativos.' },
-    { title: 'Drones', description: 'Aéreos para inmobiliaria, eventos y más.' },
-    { title: 'Postproducción', description: 'Edición, color, motion graphics, efectos visuales.' },
+    {
+      title: "Videos Corporativos",
+      description: "Presentación de empresa, cultura, testimonios de clientes.",
+    },
+    {
+      title: "Publicidad en Video",
+      description: "Spots para TV, digital y redes sociales.",
+    },
+    {
+      title: "Contenido Redes Sociales",
+      description: "Reels, TikToks, Stories y más para tu marca.",
+    },
+    {
+      title: "Videos de Producto",
+      description: "Demostraciones, unboxings y reviews.",
+    },
+    {
+      title: "Videos de Capacitación",
+      description: "Training interno, manuales en video.",
+    },
+    {
+      title: "Eventos",
+      description: "Cobertura audiovisual de eventos presenciales y virtuales.",
+    },
+    {
+      title: "Fotografía Comercial",
+      description: "Producto, lifestyle, retratos corporativos.",
+    },
+    {
+      title: "Drones",
+      description: "Aéreos para inmobiliaria, eventos y más.",
+    },
+    {
+      title: "Postproducción",
+      description: "Edición, color, motion graphics, efectos visuales.",
+    },
   ];
 
   const process = [
-    { step: '01', title: 'Concepto', description: 'Definimos el mensaje, formato y enfoque creativo.' },
-    { step: '02', title: 'Pre-producción', description: 'Guión, locaciones, casting, planificación.' },
-    { step: '03', title: 'Producción', description: 'Grabación con equipo profesional y dirección.' },
-    { step: '04', title: 'Post-producción', description: 'Edición, color, audio, motion graphics, entregables.' },
+    {
+      step: "01",
+      title: "Concepto",
+      description: "Definimos el mensaje, formato y enfoque creativo.",
+    },
+    {
+      step: "02",
+      title: "Pre-producción",
+      description: "Guión, locaciones, casting, planificación.",
+    },
+    {
+      step: "03",
+      title: "Producción",
+      description: "Grabación con equipo profesional y dirección.",
+    },
+    {
+      step: "04",
+      title: "Post-producción",
+      description: "Edición, color, audio, motion graphics, entregables.",
+    },
   ];
 
   const stats = [
-    { value: '500+', label: 'Videos producidos' },
-    { value: '50M+', label: 'Views generados' },
-    { value: '100+', label: 'Campañas' },
-    { value: '98%', label: 'Satisfacción' },
+    { value: "500+", label: "Videos producidos" },
+    { value: "50M+", label: "Views generados" },
+    { value: "100+", label: "Campañas" },
+    { value: "98%", label: "Satisfacción" },
   ];
 
   const testimonials = [
-    { quote: 'El video corporativo que crearon superó nuestras expectativas. Lo usamos en todo.', author: 'Andrés Molina', role: 'Director de Marca' },
-    { quote: 'Entendieron el concepto desde la primera reunión. El resultado fue exacto y más.', author: 'María José López', role: 'Marketing Manager' },
-    { quote: 'Calidad de producción de nivel internacional a precios competitivos.', author: 'Carlos Eduardo Ruiz', role: 'CEO' },
+    {
+      quote:
+        "El video corporativo que crearon superó nuestras expectativas. Lo usamos en todo.",
+      author: "Andrés Molina",
+      role: "Director de Marca",
+    },
+    {
+      quote:
+        "Entendieron el concepto desde la primera reunión. El resultado fue exacto y más.",
+      author: "María José López",
+      role: "Marketing Manager",
+    },
+    {
+      quote:
+        "Calidad de producción de nivel internacional a precios competitivos.",
+      author: "Carlos Eduardo Ruiz",
+      role: "CEO",
+    },
   ];
 
   const faqs = [
-    { question: '¿Cuánto cuesta un video?', answer: 'Un video simple puede empezar en $2,000. Producciones complejas con locación, talento y postproducción avanzada varían significativamente.' },
-    { question: '¿Cuánto tiempo toma?', answer: 'Un video corporativo típico toma 2-4 semanas desde concepto hasta entrega. Proyectos complejos pueden tomar más.' },
-    { question: '¿Qué incluyen las entregas?', answer: 'Archivo maestro, versiones para redes sociales (16:9, 9:16, 1:1), cortes de 15 y 30 segundos, y archivos de audio.' },
-    { question: '¿Pueden ir a locación?', answer: 'Sí, cubrimos producciones en todo el país y el extranjero según el proyecto.' },
+    {
+      question: "¿Cuánto cuesta un video?",
+      answer:
+        "Un video simple puede empezar en $2,000. Producciones complejas con locación, talento y postproducción avanzada varían significativamente.",
+    },
+    {
+      question: "¿Cuánto tiempo toma?",
+      answer:
+        "Un video corporativo típico toma 2-4 semanas desde concepto hasta entrega. Proyectos complejos pueden tomar más.",
+    },
+    {
+      question: "¿Qué incluyen las entregas?",
+      answer:
+        "Archivo maestro, versiones para redes sociales (16:9, 9:16, 1:1), cortes de 15 y 30 segundos, y archivos de audio.",
+    },
+    {
+      question: "¿Pueden ir a locación?",
+      answer:
+        "Sí, cubrimos producciones en todo el país y el extranjero según el proyecto.",
+    },
   ];
 
   const relatedServices = [
-    { title: 'Marketing Digital', href: '/servicios/marketing-digital', iconName: 'TrendingUp' },
-    { title: 'Redes Sociales', href: '/servicios/marketing-redes-sociales', iconName: 'Share2' },
-    { title: 'Publicidad Digital', href: '/servicios/publicidad-digital', iconName: 'Target' },
-    { title: 'Branding', href: '/servicios/branding-diseno', iconName: 'Palette' },
+    {
+      title: "Marketing Digital",
+      href: "/servicios/marketing-digital",
+      iconName: "TrendingUp",
+    },
+    {
+      title: "Redes Sociales",
+      href: "/servicios/marketing-redes-sociales",
+      iconName: "Share2",
+    },
+    {
+      title: "Publicidad Digital",
+      href: "/servicios/publicidad-digital",
+      iconName: "Target",
+    },
+    {
+      title: "Branding",
+      href: "/servicios/branding-diseno",
+      iconName: "Palette",
+    },
+  ];
+
+  const pricingParams = [
+    {
+      name: "Starter",
+      description: "Ideal para marcas que recién empiezan a crear contenido",
+      price: "S/1,200",
+      frequency: "/mes",
+      features: [
+        "1 jornada de grabación al mes",
+        "8 piezas audiovisuales/mes",
+        "Edición estándar de video",
+        "Adaptación para reels y stories",
+        "Entrega de archivos optimizados",
+        "Reunión mensual de planificación",
+      ],
+      buttonText: "Solicitar este plan",
+      isPopular: false,
+      buttonVariant: "outline" as const,
+    },
+    {
+      name: "Business",
+      description:
+        "Para marcas que necesitan contenido constante y más profesional",
+      price: "S/2,500",
+      frequency: "/mes",
+      features: [
+        "3 jornadas de grabación al mes",
+        "16 piezas audiovisuales/mes",
+        "Edición profesional de video",
+        "Reels, stories, piezas para pauta y corporativo",
+        "Cobertura de producto, servicio o marca",
+        "Motion graphics básicos",
+        "Reunión semanal de seguimiento",
+      ],
+      buttonText: "Solicitar este plan",
+      isPopular: true,
+      buttonVariant: "default" as const,
+    },
+    {
+      name: "Enterprise",
+      description:
+        "Producción audiovisual completa para marcas que quieren escalar en serio",
+      price: "S/4,500",
+      frequency: "/mes",
+      features: [
+        "5 jornadas de grabación al mes",
+        "31 piezas audiovisuales/mes",
+        "Edición avanzada y narrativa estratégica basada en análisis de datos",
+        "Cobertura de campañas, eventos y lanzamientos",
+        "Motion graphics y animaciones avanzadas",
+        "Guiones y planificación creativa",
+        "Prioridad en entregas",
+        "Reunión semanal de estrategia y reportes",
+      ],
+      buttonText: "Solicitar este plan",
+      isPopular: false,
+      buttonVariant: "outline" as const,
+    },
   ];
 
   return (
@@ -86,6 +261,7 @@ export default function ProduccionAudiovisualPage() {
       stats={stats}
       testimonials={testimonials}
       faqs={faqs}
+      pricingParams={pricingParams}
       relatedServices={relatedServices}
     />
   );
